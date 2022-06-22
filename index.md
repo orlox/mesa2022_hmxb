@@ -244,6 +244,6 @@ ylabel!("y/a")
 savefig(joinpath(@OUTPUT, "roche.svg"))
 
 ```
-\figenv{the caption}{/assets/maxilab/code/output/roche.svg}{width:100%;border: 1px solid gray;}
+\figenv{the caption}{/assets/index/code/output/roche.svg}{width:100%;border: 1px solid gray;}
 
 More text
