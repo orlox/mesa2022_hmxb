@@ -1,0 +1,4 @@
+Sitemap: https://orlox.github.io/mesa2022_hmxb/sitemap.xml
+
+User-agent: *
+Disallow:
