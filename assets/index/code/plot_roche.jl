@@ -102,7 +102,7 @@ equipotentials = [2*phi_L1, phi_L1, 0.5*(phi_L1+phi_L2),phi_L2,0.5*(phi_L2+phi_L
 
 xvals = LinRange(-1,2,500)
 yvals = LinRange(-1,1,500)
-contour(xvals, yvals, potential_2D, levels=equipotentials, color=:black,colorbar=false)
+contour(xvals, yvals, potential_2D, levels=equipotentials, color=:black,colorbar=false, linewidth=1)
 scatter!([x_L1,x_L2,x_L3,0.5,0.5],[0,0,0,sqrt(1-0.5^2),-sqrt(1-0.5^2)],markersize=8,label=nothing)
 xlabel!("x/a")
 ylabel!("y/a")
