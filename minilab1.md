@@ -360,6 +360,16 @@ ignore_min_corr_coeff_for_scale_max_correction = .true.
 ignore_species_in_max_correction = .true.
 scale_max_correction_for_negative_surf_lum = .true.
 ```
+
+Finally, we also include the following option
+```fortran
+use_superad_reduction = .true.
+```
+This activates an implicit method to enhance energy transport in regions near the
+Eddington limit of the star. It can help simulations towards the end of mass
+transfer, but should be thought of more as stellar engineering than an actual
+physical model.
+
 ### Modifications to `@pgstar` section of `inlist1`
 For pgstar here is a pre-made grid that will show most of what you need. You can also include 
 `pause_before_terminate = .false.` in `@star_job` so that your pgstar plot does not vanish at the end
