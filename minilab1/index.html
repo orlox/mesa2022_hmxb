@@ -187,7 +187,7 @@ ignore_species_in_max_correction = .true.
 scale_max_correction_for_negative_surf_lum = .true.</code></pre>
 <h3 id=modifications_to_pgstar_section_of_inlist1 ><a href="#modifications_to_pgstar_section_of_inlist1" class=header-anchor >Modifications to <code>@pgstar</code> section of <code>inlist1</code></a></h3>
 <p>For pgstar here is a pre-made grid that will show most of what you need. You can also include <code>pause_before_terminate &#61; .false.</code> in <code>@star_job</code> so that your pgstar plot does not vanish at the end of the run. Every 100 steps the output will be saved in the folder <code>png1</code>.</p>
-<p><button type=button  class=collapsible >  Content for <code>@pgstar</code>, <strong>press to expand</strong> </button><div class=collapsiblecontent >  </p>
+<button type=button  class=collapsible >  Content for <code>@pgstar</code>, <strong>press to expand</strong> </button><div class=collapsiblecontent >  </p>
 <pre><code class="fortran hljs">pgstar_interval = <span class=hljs-number >1</span>
 
 pgstar_age_disp = <span class=hljs-number >2.5</span>
@@ -328,7 +328,8 @@ Grid2_file_prefix = <span class=hljs-string >&#x27;grid_&#x27;</span>
 Grid2_file_interval = <span class=hljs-number >100</span> <span class=hljs-comment >! 1 ! output when mod(model_number,Grid2_file_interval)==0</span>
 Grid2_file_width = -<span class=hljs-number >1</span> <span class=hljs-comment >! negative means use same value as for window</span>
 Grid2_file_aspect_ratio = -<span class=hljs-number >1</span> <span class=hljs-comment >! negative means use same value as for window</span></code></pre>
-<p></div> In order for the Kippenhahn diagram to show up in the simulation one needs to add additional input to the history file. For this purpose, copy the <code>history_columns.list</code> file into your work directory:</p>
+<p></div>
+<p>In order for the Kippenhahn diagram to show up in the simulation one needs to add additional input to the history file. For this purpose, copy the <code>history_columns.list</code> file into your work directory:</p>
 <pre><code class="bash hljs"><span class=hljs-built_in >cp</span> <span class=hljs-variable >$MESA_DIR</span>/star/defaults/history_columns.list .</code></pre>
 <p>In the file look for the <code>mixing_regions</code> option, and above it add a line saying <code>mixing_regions 10</code>. Specifically, the file will originally look like this:</p>
 <pre><code class="fortran hljs"><span class=hljs-comment >! you might want to get a more complete list of mixing regions by using the following</span>
