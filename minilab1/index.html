@@ -185,6 +185,9 @@ scale_max_correction = <span class=hljs-number >0.1d0</span>
 ignore_min_corr_coeff_for_scale_max_correction = .true.
 ignore_species_in_max_correction = .true.
 scale_max_correction_for_negative_surf_lum = .true.</code></pre>
+<p>Finally, we also include the following option</p>
+<pre><code class="fortran hljs">use_superad_reduction = .true.</code></pre>
+<p>This activates an implicit method to enhance energy transport in regions near the Eddington limit of the star. It can help simulations towards the end of mass transfer, but should be thought of more as stellar engineering than an actual physical model.</p>
 <h3 id=modifications_to_pgstar_section_of_inlist1 ><a href="#modifications_to_pgstar_section_of_inlist1" class=header-anchor >Modifications to <code>@pgstar</code> section of <code>inlist1</code></a></h3>
 <p>For pgstar here is a pre-made grid that will show most of what you need. You can also include <code>pause_before_terminate &#61; .false.</code> in <code>@star_job</code> so that your pgstar plot does not vanish at the end of the run. Every 100 steps the output will be saved in the folder <code>png1</code>.</p>
 <button type=button  class=collapsible >  Content for <code>@pgstar</code>, <strong>press to expand</strong> </button><div class=collapsiblecontent >  </p>
