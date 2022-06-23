@@ -32,3 +32,8 @@ Add here global latex commands to use throughout your pages.
 </figure>
 ~~~
 }
+\newcommand{\html}[1]{~~~#1~~~}
+\newcommand{\red}[1]{\html{<span style="color:red">#1</span>}}
+\newcommand{\collaps}[2]{
+~~~<button type="button" class="collapsible">~~~ #1 ~~~</button><div class="collapsiblecontent">~~~ #2 ~~~</div>~~~
+}
