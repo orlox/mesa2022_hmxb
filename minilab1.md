@@ -509,6 +509,7 @@ Grid2_file_width = -1 ! negative means use same value as for window
 Grid2_file_aspect_ratio = -1 ! negative means use same value as for window
 ```
 }
+
 In order for the Kippenhahn diagram to show up in the simulation one needs to add additional
 input to the history file. For this purpose, copy the `history_columns.list` file into your work directory:
 ```bash
