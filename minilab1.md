@@ -64,7 +64,11 @@ the `tree` command shows all files contained within the current folder, its outp
     ├── run_binary_extras.f90
     └── run_star_extras.f90
 ```
+@@colbox-blue 
+If the `tree` command is not available in your system, you can also use `ls -lh *` to see all files within the work folder.
+ @@
 As you can see, the structure of a `binary` work folder is similar to that of a `star`.
+
 ### Inlists in a `binary` work folder
 The file `inlist_project` now contains options relevant to the binary system rather than each component.
 `inlist1` and `inlist2` are the inlists that are used for each component, and contain the same
@@ -312,12 +316,12 @@ Here we have included the `Dutch` prescription of mass loss that is coded in `ME
 is just a combination of various published prescriptions that are designed for different stars. If you ever use the `Dutch`
 prescription in a published paper be aware that **\red{it is not ok}** to describe your mass loss as "the Dutch scheme from MESA",
 you need to give proper credit to the individual prescriptions it uses. In particular for the above options winds will be computed as a combination of
-the prescriptions from de [Jager et al. (1988)](https://ui.adsabs.harvard.edu/abs/1988A%26AS...72..259D/abstract), 
-[Nugis & Lamers (2000)](https://ui.adsabs.harvard.edu/abs/2000A%26A...360..227N/abstract) and [Vink et al. (2001)](https://ui.adsabs.harvard.edu/abs/2001A%26A...369..574V/abstract).
+the prescriptions from \cite{deJager+88}, \cite{NugisLamers00} and \cite{Vink+01}.
 
 Massive stars are also expected to have strong overshooting from their convective cores. We include some options for
 this, as well as to use the Ledoux criterion to determine convective boundaries (the amount of overshooting chosen
-follows the calibration of [Brott et al. (2011)](https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.115B/abstract)):
+follows the calibration of \cite{Brott+11} for core hydrogen burning, while for core helium burning we use a bit of
+exponential overshooting):
 ```fortran
 ! we use step overshooting
 overshoot_scheme(1) = 'step'
@@ -326,6 +330,14 @@ overshoot_zone_loc(1) = 'core'
 overshoot_bdy_loc(1) = 'top'
 overshoot_f(1) = 0.345
 overshoot_f0(1) = 0.01
+
+! a bit of exponential overshooting for convective core during He burn
+overshoot_scheme(2) = 'exponential'
+overshoot_zone_type(2) = 'burn_He'
+overshoot_zone_loc(2) = 'core'
+overshoot_bdy_loc(2) = 'top'
+overshoot_f(2) = 0.01
+overshoot_f0(2) = 0.005
 
 use_ledoux_criterion = .true.
 alpha_semiconvection = 1d0
@@ -355,17 +367,18 @@ can be a good option to work out solver issues in publication-quality runs:
 
 ```fortran
 ! Use scaled corrections to aid the solver
-scale_max_correction = 0.1d0
+scale_max_correction = 0.03d0
 ignore_min_corr_coeff_for_scale_max_correction = .true.
 ignore_species_in_max_correction = .true.
 scale_max_correction_for_negative_surf_lum = .true.
 ```
 
-Finally, we also include the following option
+Finally, we also include the following options
 ```fortran
 use_superad_reduction = .true.
+eps_mdot_leak_frac_factor = 0d0
 ```
-This activates an implicit method to enhance energy transport in regions near the
+The first option activates an implicit method to enhance energy transport in regions near the
 Eddington limit of the star. It can help simulations towards the end of mass
 transfer, but should be thought of more as stellar engineering than an actual
 physical model.
@@ -373,7 +386,10 @@ physical model.
 ### Modifications to `@pgstar` section of `inlist1`
 For pgstar here is a pre-made grid that will show most of what you need. You can also include 
 `pause_before_terminate = .false.` in `@star_job` so that your pgstar plot does not vanish at the end
-of the run. Every 100 steps the output will be saved in the folder `png1`.
+of the run. 
+Every 100 steps the output will be saved in the folder `png1`.
+Another useful `pgstar` option to add in `@star_job` is `save_pgstar_files_when_terminate = .true.`.
+This will ensure the `pgstar` output is saved at the very last step.
 
 \collaps{Content for `@pgstar`, **press to expand**}{
 ```fortran
@@ -453,13 +469,13 @@ History_Panels1_ymax(1) = -101d0 ! only used if /= -101d0
 History_Panels1_yaxis_name(2) = 'lg_mtransfer_rate' !
 History_Panels1_yaxis_reversed(2) = .false.
 History_Panels1_ymin(2) = -8d0 ! only used if /= -101d0
-History_Panels1_ymax(2) = -2d0 ! only used if /= -101d0        
+History_Panels1_ymax(2) = -1d0 ! only used if /= -101d0        
 History_Panels1_dymin(2) = 1 
 
 History_Panels1_other_yaxis_name(2) = 'log_abs_mdot' 
 History_Panels1_other_yaxis_reversed(2) = .false.
 History_Panels1_other_ymin(2) = -8d0 ! only used if /= -101d0
-History_Panels1_other_ymax(2) = -2d0 ! only used if /= -101d0        
+History_Panels1_other_ymax(2) = -1d0 ! only used if /= -101d0        
 History_Panels1_other_dymin(2) = 1 
 
 History_Panels1_yaxis_name(3) = 'rl_relative_overflow_1'
@@ -540,7 +556,7 @@ originally look like this:
 and after editing it will look like this:
 ```fortran
 ! you might want to get a more complete list of mixing regions by using the following
-mixing regions 10
+mixing_regions 10
 !mixing_regions <integer> ! note: this includes regions where the mixing type is no_mixing.
 
    ! the <integer> is the number of regions to report
@@ -550,3 +566,94 @@ mixing regions 10
 ```
 
 ## Onto the minilab!
+After all this work you should be all set to go. You can test your setup by running
+```bash
+./rn | tee out.txt
+```
+which should give you a nice pgstar window that looks like the following after a bit of evolution:
+
+\figenv{pgstar window at the beginning of the Roche lobe overflow phase.}{/assets/grid_000100.png}{width:100%;border: 1px solid gray;}
+
+\red{You don't need to complete the entire simulation right now, as adjustments are needed for this minilab.}
+
+@@colbox-blue 
+Are you having issues setting up the template? You can get a working copy of it by clicking [here](/assets/minilab1/template1.tar.gz).
+ @@
+
+Owing to its long period orbit, this system undergoes Roche lobe overflow right after the main sequence.
+The objective of this minilab is to time how long this phase lasts, and what impact it has on the orbit. The questions
+you have to answer are the following:
+- How long does the Roche lobe overflow phase last? How does this compare to the total lifestyle of the system?
+- How does the orbital period respond to mass transfer?
+- What are the properties of the donor after the mass transfer phase?
+- How does the mass transfer rate compare to the Eddington rate of the black hole?
+- How do the results change depending on the prescription used for mass transfer?
+Instructions on how to time the Roche lobe overflow phase, as well as how to change mass transfer prescription, are given in the next subsections.
+
+### Timing the Roche lobe overflow phase
+To time the phase of Roche lobe overflow, we will add code in the `extras_binary_check_step` subroutine of `run_binary_extras`.
+A few pointers on how to do this follow:
+- The radius and roche lobe radius of the star can be accesed through `b% r(1)` and `b% rl(1)`.
+- The timestep in years can be accesed with `b% time_step`.
+- You can make use of `b% xtra(1)` to keep track of the total time in Roche lobe overflow. As mentioned previously, `b% xtra` is available for users to store information, and the code internally takes care of adjusting it in case of retries, as well as restoring it during a restart. At the start of the simulation all values of `b% xtra` are set to zero.
+- For simplicity, you can just print the age to the terminal using `write(*,*) "check time", b% xtra(1)`.
+
+@@colbox-blue
+A more natural place to implement this would be in `extras_binary_finish_step`, but owing to a bug in the latest
+release, changes to `b% xtra` done in this subroutine are not properly stored.
+ @@
+
+ \red{Are you having trouble implementing this?} Compare your work with that of your neighbouring students and TA. If you
+ still have problems finding a solution, you can check an implementation of this by clicking the box below.
+
+\collaps{Implementation, **press to expand \red{(Spoilers!!)}**}{
+```fortran
+integer function extras_binary_check_model(binary_id)
+   type (binary_info), pointer :: b
+   integer, intent(in) :: binary_id
+   integer :: ierr
+   call binary_ptr(binary_id, b, ierr)
+   if (ierr /= 0) then ! failure in  binary_ptr
+      return
+   end if  
+   extras_binary_check_model = keep_going
+
+   if (b% r(1) > b% rl(1)) then
+       b% xtra(1) = b% xtra(1)+b% time_step
+   end if
+   write(*,*) "check time", b% xtra(1)
+
+end function extras_binary_check_model
+```}
+
+### Changing the mass transfer prescription
+The mass transfer prescription, referred in `MESA` by the option `mdot_scheme`, is an important aspect that should be taken into account when modelling binaries. It is also one you must remember to acknowledge when publishing work done with `MESA`, by specifying the prescription used and citing the corresponding source.
+As we are not doing 3D hydrodynamics, we need to rely in approximations that determine the mass transfer rate
+given the current state of the binary system. To adjust the prescription you can use the following in the
+`@binary_controls` section of `inlist_project`:
+```fortran
+mdot_scheme = 'Ritter'
+```
+The main mass transfer schemes available are:
+- `roche_lobe`: Mass transfer rate is determined such that the surface of the donor star remains within its roche lobe. 
+- `Ritter`: Follows \cite{Ritter1988} to account for mass transfer through L1 from an extended atmosphere before the onset of Roche lobe overflow. **This is the default option**.
+- `Kolb`: Follows \cite{KolbRitter1990}, and extension of the `Ritter` scheme that accounts for the effect of overflow from regions below the photosphere.
+
+**You should perform two runs, using the `Ritter` and the `Kolb` schemes.** Provide answers to the questions for both. Depending on time, you might want to split work across others in your table. For example, two people can do the run with `Ritter` while the other two do the run with `Kolb`. This can be useful to validate your results.
+
+## Answers
+Below there is a set of answers to the questions given. **\red{Be sure to try and answer them by yourself before peeking in here!}**
+
+\collaps{Answers to questions, **press to expand \red{(Spoilers!!)}**}{
+TBD
+}
+
+# References
+
+* \biblabel{deJager+88}{de Jager et al. (1988)} [de Jager, C., Nieuwenhuijzen, H., van der Hucht, K. A.](https://ui.adsabs.harvard.edu/abs/1988A%26AS...72..259D/abstract), Astronomy and Astrophysics, Suppl. Ser., Vol. 72, p. 259-289 (1988)
+* \biblabel{Ritter1988}{Ritter (1988)} [Ritter, H.,](https://ui.adsabs.harvard.edu/abs/1988A%26A...202...93R/abstract), Astronomy and Astrophysics, Vol. 202, p. 93-100 (1988)
+* \biblabel{KolbRitter1990}{Kolb & Ritter(1990)} [Kolb, U., Ritter, H.,](https://ui.adsabs.harvard.edu/abs/1990A%26A...236..385K/abstract), Astronomy and Astrophysics, Vol. 236, p. 385-392 (1990)
+* \biblabel{NugisLamers00}{Nugis & Lamers et al. (2000)} [Nugis, T., Lamers, H. J. G. L. M.](https://ui.adsabs.harvard.edu/abs/2000A%26A...360..227N/abstract), Astronomy and Astrophysics, Vol. 360, p.227-244 (2000)
+* \biblabel{Vink+01}{Vink et al. (2001)} [Vink, Jorick S., de Koter, A., Lamers, H. J. G. L. M.](https://ui.adsabs.harvard.edu/abs/2001A%26A...369..574V/abstract), Astronomy and Astrophysics, v.369, p.574-588 (2001)
+* \biblabel{Brott+11}{Brott et al. (2011)} [Brott, I., de Mink, S. E., Cantiello, M., Langer, N., de Koter, A., Evans, C. J., Hunter, I., Trundle, C., Vink, J. S.](https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.115B/abstract), Astronomy & Astrophysics, Volume 530, id.A115, 20 pp. (2011)
+
