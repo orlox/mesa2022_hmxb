@@ -32,8 +32,14 @@ Add here global latex commands to use throughout your pages.
 </figure>
 ~~~
 }
+\newcommand{\tablecaption}[1]{
+~~~ <figure style="text-align:center;"><figcaption>#1</figcaption> </figure>~~~
+}
+
+<!-- These are to write text in red -->
 \newcommand{\html}[1]{~~~#1~~~}
 \newcommand{\red}[1]{\html{<span style="color:red">#1</span>}}
+<!-- Command to build a collapsible block. css styling in extras.css and js code in page_foot.html -->
 \newcommand{\collaps}[2]{
 ~~~<button type="button" class="collapsible">~~~ #1 ~~~</button><div class="collapsiblecontent">~~~ #2 ~~~</div>~~~
 }

@@ -648,7 +648,7 @@ Below there is a set of answers to the questions given. **\red{Be sure to try an
 TBD
 }
 
-# References
+## References
 
 * \biblabel{deJager+88}{de Jager et al. (1988)} [de Jager, C., Nieuwenhuijzen, H., van der Hucht, K. A.](https://ui.adsabs.harvard.edu/abs/1988A%26AS...72..259D/abstract), Astronomy and Astrophysics, Suppl. Ser., Vol. 72, p. 259-289 (1988)
 * \biblabel{Ritter1988}{Ritter (1988)} [Ritter, H.,](https://ui.adsabs.harvard.edu/abs/1988A%26A...202...93R/abstract), Astronomy and Astrophysics, Vol. 202, p. 93-100 (1988)
