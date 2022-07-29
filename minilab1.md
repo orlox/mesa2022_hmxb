@@ -381,7 +381,9 @@ eps_mdot_leak_frac_factor = 0d0
 The first option activates an implicit method to enhance energy transport in regions near the
 Eddington limit of the star. It can help simulations towards the end of mass
 transfer, but should be thought of more as stellar engineering than an actual
-physical model.
+physical model. The second one removes a correction to the energy equation
+during mass transfer. Although this ignores a physical effect, its implementation
+can make our simulations unstable so for simplicity we will ignore it.
 
 ### Modifications to `@pgstar` section of `inlist1`
 For pgstar here is a pre-made grid that will show most of what you need. You can also include 
@@ -640,6 +642,13 @@ The main mass transfer schemes available are:
 - `Kolb`: Follows \cite{KolbRitter1990}, and extension of the `Ritter` scheme that accounts for the effect of overflow from regions below the photosphere.
 
 **You should perform two runs, using the `Ritter` and the `Kolb` schemes.** Provide answers to the questions for both. Depending on time, you might want to split work across others in your table. For example, two people can do the run with `Ritter` while the other two do the run with `Kolb`. This can be useful to validate your results.
+
+## Extra work!
+
+Have you finished early? Then congrats! I also don't want you just hovering around, so you can do the following:
+
+- See how the outcome of binary interaction is modified for a different orbital period. For example, consider periods of $25$ and $100$ days. Is the final product of binary evolution significantly different?
+- In computing the time during which the system undergoes mass transfer we have ignored a small detail. When the system enters into Roche lobe overflow and detaches, it will do so only for a fraction of the timestep. The provided solution ignores this subtlety and includes the entire timestep. How would you correct for this?
 
 ## Answers
 Below there is a set of answers to the questions given. **\red{Be sure to try and answer them by yourself before peeking in here!}**

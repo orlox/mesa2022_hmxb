@@ -28,7 +28,7 @@ Add here global latex commands to use throughout your pages.
 ~~~
 <figure style="text-align:center;">
 <img src="!#2" style="padding:0;#3" alt="#1"/>
-<figcaption>#1</figcaption>
+<figcaption>~~~#1~~~</figcaption>
 </figure>
 ~~~
 }
