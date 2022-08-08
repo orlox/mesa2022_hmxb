@@ -12,14 +12,14 @@ rss = "Model the conditions under which mass transfer can produce a GW source"
 
 ## Orbital shrinkage from mass transfer
 
-Under the assumption that mass transfer is extremely inefficient and lost material
+Under the assumption that mass transfer is extremely inefficient (all mass ejected) and lost material
 takes away the specific orbital angular momentum of the accretor, the evolution of
-the orbital separation $a_\mathrm{f}$ can be analitically described in terms of the final mass ratio $q_\mathrm{f}\equiv m_\mathrm{donor}/m_\mathrm{accretor}$
-and an initial separation $a_{i}$ at which the system had a mass ratio $q_\mathrm{i}$ \citep{soberman+1997}:
+the orbital separation $a_\mathrm{f}$ can be analitically described. In terms of the final mass ratio $q_\mathrm{f}\equiv m_\mathrm{donor,f}/m_\mathrm{accretor,f}$
+and a separation $a_{i}$ at which the system had a mass ratio $q_\mathrm{i}$ we have \citep{soberman+1997}:
 
 $$\frac{a_\mathrm{f}}{a_\mathrm{i}}=\left(\frac{q_\mathrm{i}}{q_\mathrm{f}}\right)^2\left(\frac{1+q_\mathrm{i}}{1+q_\mathrm{f}}\right)\exp\left(2[q_\mathrm{f}-q_\mathrm{i}]\right).$$
 
-The initial and final points needs not refer to that at the onset or end of the mass transfer phase, they can also be any arbitrary point during the process. From that we can make estimate how much the orbital separation would change respect to the initial one in terms of the accretor mass and the mass of the companion. In particular, the figure below shows an example of a $30M_\odot$ star being stripped down to $15M_\odot$ by companions of different masses. 
+The initial and final points needs not refer to that at the onset or end of the mass transfer phase, they can also be any arbitrary point during the process. From that we can estimate how much the orbital separation would change respect to the initial one in terms of the accretor mass and the mass of the companion. In particular, the figure below shows an example of a $30M_\odot$ star being stripped down to $15M_\odot$ by companions of different masses. 
 
 
 ```julia:plot_roche
@@ -39,7 +39,7 @@ Mfinal = 15
 
 xvals = LinRange(15,30,100)
 plot()
-for Ma in [4,5,6]
+for Ma in [7,6,5,4]
     qvals = xvals./Ma
     qi = 30/Ma
     plot!(xvals, map(qf->log10(a_div_ai(qf,qi)), qvals), label=string(Ma)*"\$M_\\odot\$", legend=:bottomright)
@@ -56,11 +56,27 @@ So if mass transfer can proceed stably for extreme mass ratios, we could potenti
 
 $$t_\mathrm{merger}=\frac{a^4}{4B},\qquad B\equiv \frac{64G^3}{5c^5}(M_1+M_2)M_1M_2.$$
 
+Taking arbitrarily high initial mass ratios could in principle lead to arbitrarily small post mass-transfer separations,
+but there is a competition with mass transfer stability, which we have studied in the previous lab. The purpose of this lab
+is to study whether or not at the boundary for stability the mass ratio is extreme enough to provide the required shrinkage in orbital
+separation for gravitational waves to take over. We will consider a $30M_\odot$ donor star with different masses for a black hole companion, and compute a grid of simulations
+using all the cores at disposition from the attending crowd.
+
 ## Save a post-main sequence model
+
+In the interest of time, we will only consider systems which interact after the main sequence. Systems interacting during the main sequence undergo a variety of qualitatively different mass transfer phases, and can be more expensive. Additionally, some of the simplifications we will take below cannot be easily applied for main sequence donors (particularly, we will make use of the helium core mass). Now, if we are just going to consider interaction after the main sequence, it would certainly be useful to avoid repeating the main sequence evoilution every time. So we will first save a model right after the end of the main sequence. We will start with the solution to the previous lab.
 
 @@colbox-blue 
 Did you have issues finishing minilab2? You can get a working copy of its solution [here](/assets/maxilab/template_maxilab.tar.gz).
 @@
+
+Let us first turn our binary into an effectively single star. To do this we can set in `inlist_project`
+
+```fortran
+m1 = 30
+m2 = 30
+initial_period_in_days = 1d5
+```
 
 ## Setup our template for a grid
 
