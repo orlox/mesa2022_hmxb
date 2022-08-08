@@ -14,4 +14,8 @@ Credit for this lab also goes to those who carefully tested it before today!
 - Mathias Michielsen
 - Morgan Chidester
 
+As you proceed with the labs, be sure to keep your partial results saved as each
+lab builds upon the previous one. If you run into problems with a part, don't worry,
+solutions are provided at each step, including work directories ready to run!
+
 \figenv{Image credit: Sara Pinilla}{/assets/banner1.png}{width:100%;border: 1px solid gray;}
