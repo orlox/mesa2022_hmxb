@@ -15,7 +15,7 @@ Mfinal = 15
 
 xvals = LinRange(15,30,100)
 plot()
-for Ma in [4,5,6]
+for Ma in [7,6,5,4]
     qvals = xvals./Ma
     qi = 30/Ma
     plot!(xvals, map(qf->log10(a_div_ai(qf,qi)), qvals), label=string(Ma)*"\$M_\\odot\$", legend=:bottomright)
