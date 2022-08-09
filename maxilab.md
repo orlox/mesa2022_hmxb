@@ -173,7 +173,7 @@ integer function extras_binary_check_model(binary_id)
    end if
    write(*,*) "check time", b% xtra(1)
 
-   b% xtra(2) = b% r(1)/b% rl(1)
+   b% xtra(2) = max(b% r(1)/b% rl(1), b% xtra(2))
   
 end function extras_binary_check_model
     

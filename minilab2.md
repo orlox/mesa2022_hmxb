@@ -16,11 +16,11 @@ The objective of this lab will be to study the future evolution of X-ray binarie
 to have black holes, for which we also have a well characterised orbital solution. The following
 table shows the properties of these systems that will be relevant to our models:
 
-| Name  | $M_\mathrm{BH}$ $[M_\odot]$ | $M_\mathrm{star}$ $[M_\odot]$ | Period $[d]$ | Reference |
+| Name  | $M_\mathrm{star}$ $[M_\odot]$ | $M_\mathrm{BH}$ $[M_\odot]$ | Period $[d]$ | Reference |
 |-------|-------------------------------|-----------------------------|----------------|---|
-| Cyg X-1 | $21.2^{+2.2}_{-2.3}$ | $40.6^{+7.7}_{-7.1}$| $5.60$ | \cite{Miller-Jones+21}
-| LMC X-1 | $10.9\pm1.4$ | $31.79\pm3.67$| $3.91$ | \cite{Orosz+09} |
-| M33 X-7 | $15.65\pm1.45$ | $70.0\pm6.9$ | $3.45$ | \cite{Orosz+07}|
+| Cyg X-1 | $40.6^{+7.7}_{-7.1}$| $21.2^{+2.2}_{-2.3}$ | $5.60$ | \cite{Miller-Jones+21}
+| LMC X-1 | $31.79\pm3.67$| $10.9\pm1.4$ | $3.91$ | \cite{Orosz+09} |
+| M33 X-7 | $70.0\pm6.9$ | $15.65\pm1.45$ | $3.45$ | \cite{Orosz+07}|
 \tablecaption{HMXBs with orbital solutions that are known to host black holes.}
 
 All of these systems are expected to have started as a non-degenerate binary, where the
@@ -37,11 +37,11 @@ m1 = 40.6d0
 m2 = 21.2d0
 initial_period_in_days = 5.6d0
 ```
-The objective will be to model the three systems in the table above, study how binary interaction differs between them,
+Here `m1` corresponds to the mass of the star and `m2` to the mass of the black hole, which me model as a point mass. The objective will be to model the three systems in the table above, study how binary interaction differs between them,
 and assess some of the limitations of the `binary` module.
 
 ## Modifications to the template
-We will start this minilab using the solution to minilab 1. Two small adjustements that we will need are the following
+We will start this minilab using the solution to minilab 1. \red{Throughout the lab we will make use of} `mdot_scheme='Kolb'`. Two small adjustements that we will need are the following
 - Set `max_model_number=400` in `inlist1`. This is enough to model the systems until near-detachment. We will ignore the core helium burning phase.
 - Add `Kipp_xaxis_name = 'star_age'` and change `History_Panels1_xaxis_name='star_age'` in `inlist1`. Having properties shown against time instead of model number in `pgstar` will help understand the different timescales that come into play.
 
@@ -82,7 +82,7 @@ we will require that $\dot{M}_\mathrm{transfer}>100 \dot{M}_\mathrm{thermal}$ to
 
 Implement this check in `extras_binary_finish_step`. Use the following pointers to do so:
 - You can use the defined constant `standard_cgrav`. Compute both $\dot{M}_\mathrm{thermal}$ and $\dot{M}_\mathrm{dynamical}$ and print their values out, to turn them from cgs units to solar masses per year, you can use the constants `Msun` and `secyer`.
-- The mass transfer rate is contained in `b% mtransfer_rate`. \red{Beare that it is defined as negative.}
+- The mass transfer rate is contained in `b% mtransfer_rate`. \red{Bear in mind that it is defined as negative.}
 - Setting `extras_binary_finish_step = terminate` within the subroutine will terminate your simulation.
 - Whenever you terminate a simulation in this way, it is ideal to print a message so the run does not just silently stop.
 

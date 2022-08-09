@@ -167,7 +167,9 @@ To run this work folder of `binary` one proceeds in the same way as in `star`:
 ./rn | tee out.txt
 ```
 The `./mk` command is only needed when modifying the `run_*_extras` files, modification of inlist files
-does not require recompilation. Try running your work folder for a few (at least 50) steps and then stop the simulation
+does not require recompilation.
+The `tee` command is just a convenient way to store the terminal output in a file while still displaying it in the terminal.
+Try running your work folder for a few (at least 50) steps and then stop the simulation
 by pressing `ctrl+c` (or however that is done in a mac, cmd+c?). First thing you will notice is a significant amount of additional output,
 including both information for the star in the model as well as the binary system:
 
@@ -263,7 +265,6 @@ each star modeled, as well as one from the binary system. To restart a simulatio
 ```bash
 ./re x050 | tee outre.txt
 ```
-The tee command is just a convenient way to store the terminal output in a file while still displaying it in the terminal.
 
 ## Adjusting the work directory
 
@@ -387,7 +388,7 @@ can make our simulations unstable so for simplicity we will ignore it.
 
 ### Modifications to `@pgstar` section of `inlist1`
 For pgstar here is a pre-made grid that will show most of what you need. You can also include 
-`pause_before_terminate = .false.` in `@star_job` so that your pgstar plot does not vanish at the end
+`pause_before_terminate = .true.` in `@star_job` so that your pgstar plot does not vanish at the end
 of the run. 
 Every 100 steps the output will be saved in the folder `png1`.
 Another useful `pgstar` option to add in `@star_job` is `save_pgstar_files_when_terminate = .true.`.
@@ -593,7 +594,7 @@ you have to answer are the following:
 Instructions on how to time the Roche lobe overflow phase, as well as how to change mass transfer prescription, are given in the next subsections.
 
 ### Timing the Roche lobe overflow phase
-To time the phase of Roche lobe overflow, we will add code in the `extras_binary_check_step` subroutine of `run_binary_extras`.
+To time the phase of Roche lobe overflow, we will add code in the `extras_binary_check_model` subroutine of `run_binary_extras`.
 A few pointers on how to do this follow:
 - The radius and roche lobe radius of the star can be accesed through `b% r(1)` and `b% rl(1)`.
 - The timestep in years can be accesed with `b% time_step`.
