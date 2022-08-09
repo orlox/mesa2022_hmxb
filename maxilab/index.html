@@ -34,7 +34,7 @@ initial_model_number = <span class=hljs-number >0</span></code></pre> <p>The bin
    <span class=hljs-keyword >end</span> <span class=hljs-keyword >if</span>
    <span class=hljs-built_in >write</span>(*,*) <span class=hljs-string >&quot;check time&quot;</span>, b% xtra(<span class=hljs-number >1</span>)
 
-   b% xtra(<span class=hljs-number >2</span>) = b% r(<span class=hljs-number >1</span>)/b% rl(<span class=hljs-number >1</span>)
+   b% xtra(<span class=hljs-number >2</span>) = <span class=hljs-built_in >max</span>(b% r(<span class=hljs-number >1</span>)/b% rl(<span class=hljs-number >1</span>), b% xtra(<span class=hljs-number >2</span>))
   
 <span class=hljs-keyword >end</span> <span class=hljs-function ><span class=hljs-keyword >function</span></span> extras_binary_check_model
     
@@ -159,7 +159,7 @@ initial_model_number = <span class=hljs-number >0</span></code></pre> <p>The bin
 
 </ul>
 <div class=page-foot >
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Pablo Marchant. Last modified: August 08, 2022.
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Pablo Marchant. Last modified: August 09, 2022.
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
 </div>
 <script>
