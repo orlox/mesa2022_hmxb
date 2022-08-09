@@ -651,13 +651,6 @@ Have you finished early? Then congrats! I also don't want you just hovering arou
 - See how the outcome of binary interaction is modified for a different orbital period. For example, consider periods of $25$ and $100$ days. Is the final product of binary evolution significantly different?
 - In computing the time during which the system undergoes mass transfer we have ignored a small detail. When the system enters into Roche lobe overflow and detaches, it will do so only for a fraction of the timestep. The provided solution ignores this subtlety and includes the entire timestep. How would you correct for this?
 
-## Answers
-Below there is a set of answers to the questions given. **\red{Be sure to try and answer them by yourself before peeking in here!}**
-
-\collaps{Answers to questions, **press to expand \red{(Spoilers!!)}**}{
-TBD
-}
-
 ## References
 
 * \biblabel{deJager+88}{de Jager et al. (1988)} [de Jager, C., Nieuwenhuijzen, H., van der Hucht, K. A.](https://ui.adsabs.harvard.edu/abs/1988A%26AS...72..259D/abstract), Astronomy and Astrophysics, Suppl. Ser., Vol. 72, p. 259-289 (1988)

@@ -398,13 +398,6 @@ From this, how would you proceed to compute the distance between $L_2$ and the c
 in your `run_binary_extras` can be a heavy task, so don't worry if you can't manage to finish it. Most relevant part is that you understand how this could be
 implemented.
 
-## Answers
-Below there is a set of answers to the questions given. **\red{Be sure to try and answer them by yourself before peeking in here!}**
-
-\collaps{Answers to questions, **press to expand \red{(Spoilers!!)}**}{
-TBD
-}
-
 ## References
 
 * \biblabel{Miller-Jones+21}{Miller-Jones et al. (2021)} [Miller-Jones, James C. A., et al.](https://ui.adsabs.harvard.edu/abs/2021Sci...371.1046M/abstract), Science, Volume 371, Issue 6533, pp. 1046-1049 (2021)
