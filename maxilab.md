@@ -65,7 +65,7 @@ using all the cores at disposition from the attending crowd. \red{Throughout the
 
 ## Save a post-main sequence model
 
-In the interest of time, we will only consider systems which interact after the main sequence. Systems interacting during the main sequence undergo a variety of qualitatively different mass transfer phases, and can be more expensive. Additionally, some of the simplifications we will make below cannot be easily applied for main sequence donors (particularly, we will make use of the helium core mass). Now, if we are just going to consider interaction after the main sequence, it would certainly be useful to avoid repeating the main sequence evoilution every time. So we will first save a model right after the end of the main sequence. We will start with the solution to the previous lab.
+In the interest of time, we will only consider systems which interact after the main sequence. Systems interacting during the main sequence undergo a variety of qualitatively different mass transfer phases, and can be more expensive. Additionally, some of the simplifications we will make below cannot be easily applied for main sequence donors (particularly, we will make use of the helium core mass). Now, if we are just going to consider interaction after the main sequence, it would certainly be useful to avoid repeating the main sequence evoilution every time. So we will first save a model right after the end of the main sequence. We will start with the solution to the previous lab without enhanced angular momentum loss.
 
 @@colbox-blue 
 Did you have issues finishing minilab2? You can get a working copy of its solution [here](/assets/maxilab/template_maxilab.tar.gz).

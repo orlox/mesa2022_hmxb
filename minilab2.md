@@ -51,7 +51,7 @@ Did you have issues finishing minilab1? You can get a working copy of its soluti
 
 ## Run your models
 Now, using the adjusted template, run all three simulations. Answer the following questions, and discuss them with those on your table. You can also
-spread out the work among your nearby colleagues, if so be sure to have two people modelling M33 X-7:
+spread out the work among your nearby colleagues:
 - How much does the mass transfer phase last compared to the total lifetime of the system (consider here only the time modeled within the `max_model_number=400` constraint).
 - Do the evolution of these systems differ qualitatively from the one on minilab1?
 - Are all simulations running smoothly? Or are you running into numerical issues?
@@ -60,7 +60,7 @@ The last point in particular will be dealt with in the next section, so if you f
 
 ## Limitations of MESA
 
-As you might have seen, one of the systems modeled runs into some issues (to put it lightly). Mass transfer rates go to very high values, approaching
+As you might have seen, two of the systems modeled runs into some issues (to put it lightly). Mass transfer rates go to very high values, approaching
 a solar mass per year. This points to some limitations within MESA, as the code models the donor star as a 1-dimensional object. For extreme mass ratios,
 the shrinkage of the orbit as mass transfer proceeds becomes extreme enough that the star cannot adjust itself through mass loss to avoid extreme overflow.
 In such a case the donor would very likely engulf its companion, initiating a process of common-envelope evolution which is fundamentally 3-dimensional.
